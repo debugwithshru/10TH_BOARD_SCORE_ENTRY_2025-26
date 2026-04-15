@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 fileBase64 = await new Promise((resolve, reject) => {
                     const reader = new FileReader();
-                    reader.onload = () => resolve(reader.result);
+                    reader.onload = () => resolve(reader.result.split(',')[1]);
                     reader.onerror = (e) => reject(e);
                     reader.readAsDataURL(file);
                 });
