@@ -138,17 +138,17 @@
 
                 <!-- LIVE PERCENTAGE PREVIEW -->
                 <div class="percentage-summary">
-                    <div class="summary-card">
-                        <label>Boards % (Theory)</label>
-                        <div id="boardPercentDisplay">0.00%</div>
+                    <div class="summary-card school">
+                        <label>School Overall %</label>
+                        <div id="schoolPercentDisplay">0.00%</div>
                     </div>
                     <div class="summary-card best-of-five">
                         <label>Best of 5 Percentage</label>
                         <div id="bestOf5PercentDisplay">0.00%</div>
                     </div>
-                    <div class="summary-card school">
-                        <label>School Overall %</label>
-                        <div id="schoolPercentDisplay">0.00%</div>
+                    <div class="summary-card">
+                        <label>Boards % (Theory)</label>
+                        <div id="boardPercentDisplay">0.00%</div>
                     </div>
                 </div>
 
@@ -172,6 +172,23 @@
 
             <button type="submit" id="submitBtn">Submit Result</button>
         </form>
+    </div>
+
+    <!-- DATA REVIEW OVERLAY -->
+    <div id="reviewOverlay" class="review-overlay">
+        <div class="review-card">
+            <h3>Review Entry Data</h3>
+            <p class="review-hint">Please verify all scores before final submission.</p>
+            
+            <div id="reviewContent" class="review-data-grid">
+                <!-- Javascript will populate this -->
+            </div>
+
+            <div class="review-actions">
+                <button type="button" id="editBtn" class="btn-secondary">Back to Edit</button>
+                <button type="button" id="confirmBtn" class="btn-primary">Confirm & Finalize</button>
+            </div>
+        </div>
     </div>
 
     <!-- SUCCESS OVERLAY -->
