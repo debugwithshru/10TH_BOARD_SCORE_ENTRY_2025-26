@@ -57,13 +57,20 @@
                     </div>
                     <div class="input-block">
                         <div class="input-content">
-                            <label class="field-label">Optional Subject <span class="req">*</span></label>
                             <select name="chosen_optional_subject" id="chosen_optional_subject" required>
                                 <option value="" disabled selected>Select Optional</option>
                                 <option value="FMM">FMM</option>
                                 <option value="IT">IT</option>
+                                <option value="OTHER">OTHER</option>
                             </select>
                         </div>
+                    </div>
+                </div>
+
+                <div id="otherOptionalWrapper" class="input-block hidden-field" style="margin-top: 15px;">
+                    <div class="input-content">
+                        <label class="field-label">Specify Optional Subject <span class="req">*</span></label>
+                        <input type="text" name="other_optional_subject" id="other_optional_subject" placeholder="e.g. FRENCH">
                     </div>
                 </div>
             </section>

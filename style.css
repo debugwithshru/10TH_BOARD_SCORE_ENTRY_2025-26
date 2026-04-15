@@ -297,3 +297,7 @@ button[type="submit"]:hover { transform: translateY(-2px); box-shadow: 0 15px 30
 @media (max-width: 600px) {
     .grid-row, .percentage-summary { grid-template-columns: 1fr; }
 }
+
+.hidden-field {
+    display: none;
+}

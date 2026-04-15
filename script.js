@@ -57,6 +57,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // --- OPTIONAL SUBJECT TOGGLE ---
+    const optionalSubjectSelect = document.getElementById('chosen_optional_subject');
+    const otherOptionalWrapper = document.getElementById('otherOptionalWrapper');
+    const otherOptionalInput = document.getElementById('other_optional_subject');
+
+    optionalSubjectSelect.addEventListener('change', () => {
+        if (optionalSubjectSelect.value === 'OTHER') {
+            otherOptionalWrapper.classList.remove('hidden-field');
+            otherOptionalInput.setAttribute('required', 'true');
+        } else {
+            otherOptionalWrapper.classList.add('hidden-field');
+            otherOptionalInput.removeAttribute('required');
+            otherOptionalInput.value = '';
+        }
+    });
+
     // --- SUBMISSION ---
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -77,7 +93,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Choice Selections
         formDataPayload.append('chosen_2nd_language', document.getElementById('chosen_2nd_language').value);
-        formDataPayload.append('chosen_optional_subject', document.getElementById('chosen_optional_subject').value);
+        
+        let optionalSubjectValue = optionalSubjectSelect.value;
+        if (optionalSubjectValue === 'OTHER') {
+            optionalSubjectValue = otherOptionalInput.value.toUpperCase();
+        }
+        formDataPayload.append('chosen_optional_subject', optionalSubjectValue);
 
         // Percentages
         formDataPayload.append('board_percentage', boardPercentDisplay.textContent);
@@ -88,7 +109,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Flatten Subject Marks
         document.querySelectorAll('.score-row').forEach(row => {
-            const subjectKey = row.getAttribute('data-subject').toUpperCase().replace(/\s+/g, '_');
+            let label = row.getAttribute('data-subject');
+            if (label === 'Optional Subject') {
+                label = optionalSubjectValue; // Use the specific name
+            }
+            const subjectKey = label.toUpperCase().replace(/\s+/g, '_');
             const theory = parseFloat(row.querySelector('.theory-input').value) || 0;
             const practical = parseFloat(row.querySelector('.practical-input').value) || 0;
             const total = parseFloat(row.querySelector('.total-display').textContent) || 0;
