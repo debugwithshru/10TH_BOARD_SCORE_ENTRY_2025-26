@@ -193,7 +193,7 @@ input:focus, select:focus, textarea:focus {
 /* PERCENTAGE SUMMARY */
 .percentage-summary {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 15px;
     margin-top: 25px;
 }
@@ -216,10 +216,16 @@ input:focus, select:focus, textarea:focus {
 }
 
 .summary-card div {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 800;
     color: var(--text-main);
 }
+
+.summary-card.best-of-five {
+    border-color: var(--accent-teal);
+    background: #f0fdff;
+}
+.summary-card.best-of-five div { color: var(--accent-teal); }
 
 .summary-card.school {
     border-color: var(--primary-orange);

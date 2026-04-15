@@ -43,6 +43,28 @@
                             <option value="NEW BOMBAY CITY SCHOOL">NEW BOMBAY CITY SCHOOL</option>
                         </select>
                     </div>
+                <div class="grid-row" style="margin-top: 20px;">
+                    <div class="input-block">
+                        <div class="input-content">
+                            <label class="field-label">Choose 2nd Language <span class="req">*</span></label>
+                            <select name="chosen_2nd_language" id="chosen_2nd_language" required>
+                                <option value="" disabled selected>Select Language</option>
+                                <option value="MARATHI">MARATHI</option>
+                                <option value="SANSKRIT">SANSKRIT</option>
+                                <option value="HINDI">HINDI</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-block">
+                        <div class="input-content">
+                            <label class="field-label">Optional Subject <span class="req">*</span></label>
+                            <select name="chosen_optional_subject" id="chosen_optional_subject" required>
+                                <option value="" disabled selected>Select Optional</option>
+                                <option value="FMM">FMM</option>
+                                <option value="IT">IT</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -53,8 +75,8 @@
                 <div class="score-grid-container">
                     <div class="score-header">
                         <span>Subject</span>
-                        <span>Theory (80)</span>
-                        <span>Practical (20)</span>
+                        <span>Theory</span>
+                        <span>Practical</span>
                         <span>Total (100)</span>
                     </div>
 
@@ -92,9 +114,17 @@
 
                     <!-- SUBJECT: SECONDARY LANGUAGE -->
                     <div class="score-row" data-subject="Secondary Language">
-                        <div class="subject-name">Secondary Language</div>
+                        <div class="subject-name">2nd Language</div>
                         <div class="mark-input-cell"><input type="number" step="1" min="0" max="80" class="theory-input" required placeholder="0-80"></div>
                         <div class="mark-input-cell"><input type="number" step="1" min="0" max="20" class="practical-input" required placeholder="0-20"></div>
+                        <div class="total-display">0</div>
+                    </div>
+
+                    <!-- SUBJECT: OPTIONAL SUBJECT -->
+                    <div class="score-row" data-subject="Optional Subject">
+                        <div class="subject-name">Optional (FMM/IT)</div>
+                        <div class="mark-input-cell"><input type="number" step="1" min="0" max="50" class="theory-input" required placeholder="0-50"></div>
+                        <div class="mark-input-cell"><input type="number" step="1" min="0" max="50" class="practical-input" required placeholder="0-50"></div>
                         <div class="total-display">0</div>
                     </div>
                 </div>
@@ -102,11 +132,15 @@
                 <!-- LIVE PERCENTAGE PREVIEW -->
                 <div class="percentage-summary">
                     <div class="summary-card">
-                        <label>Boards Percentage (Theory Avg)</label>
+                        <label>Boards % (Theory)</label>
                         <div id="boardPercentDisplay">0.00%</div>
                     </div>
+                    <div class="summary-card best-of-five">
+                        <label>Best of 5 Percentage</label>
+                        <div id="bestOf5PercentDisplay">0.00%</div>
+                    </div>
                     <div class="summary-card school">
-                        <label>School Overall Percentage (Total Avg)</label>
+                        <label>School Overall %</label>
                         <div id="schoolPercentDisplay">0.00%</div>
                     </div>
                 </div>
