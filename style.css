@@ -1,0 +1,293 @@
+:root {
+    --primary-orange: #F37021;
+    --secondary-orange: #F8981D;
+    --accent-teal: #00b8d4;
+    --danger: #e74c3c;
+    --bg-light: #f8f9fa;
+    --text-main: #2d3436;
+    --text-muted: #636e72;
+    --border-color: #f0f0f0;
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background: var(--bg-light);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.form-container {
+    max-width: 900px;
+    width: 100%;
+    background: #fff;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: var(--card-shadow);
+    position: relative;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #f0f3f4;
+    padding-bottom: 20px;
+}
+
+h1 {
+    font-size: 1.7rem;
+    letter-spacing: 1.5px;
+    color: var(--primary-orange);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.subtitle { color: var(--text-muted); font-size: 0.95rem; }
+
+.section-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary-orange);
+    margin-bottom: 20px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    border-left: 4px solid var(--primary-orange);
+    padding-left: 10px;
+}
+
+.dynamic-section {
+    margin-bottom: 25px;
+    padding: 25px;
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+}
+
+.scorecard-box {
+    background: #fffdfb;
+    border-color: #ffebd6;
+}
+
+.grid-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.input-block {
+    background: #fff;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+}
+
+.field-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 5px;
+    display: block;
+}
+
+.req { color: var(--danger); font-size: 0.9rem; }
+
+input, select, textarea {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    background: transparent;
+    padding: 6px 0;
+    border-bottom: 2px solid #f2f2f2;
+    transition: all 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-bottom-color: var(--primary-orange);
+}
+
+/* ACADEMIC YEAR BLOCKS */
+.academic-year-blocks {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 5px;
+}
+
+.ay-digit {
+    width: 32px !important;
+    height: 42px;
+    background: #fff;
+    border: 2px solid #eee !important;
+    border-radius: 6px !important;
+    text-align: center;
+    font-size: 1.2rem !important;
+    font-weight: 700 !important;
+    color: var(--primary-orange);
+    padding: 0 !important;
+}
+
+.ay-digit:focus { border-color: var(--primary-orange) !important; background: #fffdfb; }
+.ay-dash { font-weight: 700; color: #ccc; font-size: 1.2rem; }
+
+/* SCORE GRID */
+.score-grid-container {
+    margin-top: 15px;
+    background: #fff;
+    border-radius: 12px;
+    border: 1.5px solid #ffefe0;
+    overflow: hidden;
+}
+
+.score-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    background: #fdfdfd;
+    padding: 12px 15px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: 2px solid #ffefe0;
+}
+
+.score-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #ffefe0;
+}
+
+.score-row:last-child { border-bottom: none; }
+
+.subject-name { font-weight: 600; color: var(--text-main); font-size: 0.95rem; }
+
+.mark-input-cell input {
+    width: 80%;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text-main);
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.mark-input-cell input:focus { border-bottom-color: var(--primary-orange); }
+
+.total-display {
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--primary-orange);
+    text-align: center;
+}
+
+/* PERCENTAGE SUMMARY */
+.percentage-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.summary-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1.5px solid #eee;
+    text-align: center;
+}
+
+.summary-card label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 10px;
+}
+
+.summary-card div {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-main);
+}
+
+.summary-card.school {
+    border-color: var(--primary-orange);
+    background: #fffbf9;
+}
+
+.summary-card.school div { color: var(--primary-orange); }
+
+/* FILE UPLOAD */
+.file-upload-wrapper {
+    margin-top: 10px;
+    padding: 15px;
+    background: #fdfdfd;
+    border: 2px dashed #eee;
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.file-upload-wrapper:hover {
+    border-color: var(--primary-orange);
+    background: #fff8f5;
+}
+
+.file-hint {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 5px;
+}
+
+input[type="file"] {
+    border: none;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* SUBMIT */
+button[type="submit"] {
+    width: 100%;
+    margin-top: 20px;
+    padding: 18px;
+    background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(243, 112, 33, 0.2);
+    transition: all 0.3s ease;
+}
+
+button[type="submit"]:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(243, 112, 33, 0.35); }
+
+/* SUCCESS */
+.success-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255, 255, 255, 0.98);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; visibility: hidden; z-index: 100;
+    border-radius: 24px;
+    transition: all 0.5s ease;
+}
+.success-overlay.active { opacity: 1; visibility: visible; }
+.success-content { text-align: center; }
+.success-icon { font-size: 4rem; margin-bottom: 15px; }
+
+@media (max-width: 600px) {
+    .grid-row, .percentage-summary { grid-template-columns: 1fr; }
+}

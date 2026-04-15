@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10th Board Score Entry | Cocoon</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="form-container">
+        <header>
+            <img src="cocoon logo.webp" alt="Cocoon Logo" class="logo" style="height: 55px; margin-bottom: 15px;">
+            <h1>10th BOARD SCORE ENTRY</h1>
+            <p class="subtitle">Academic Year 2025-26 | Board Result Management</p>
+        </header>
+
+        <form id="boardScoreForm">
+            <!-- SECTION 1: IDENTITY & CONTEXT -->
+            <section class="dynamic-section">
+                <div class="section-title">Step 1: Student & School Context</div>
+                
+                <div class="input-block">
+                    <div class="input-content">
+                        <label class="field-label">Student Name <span class="req">*</span></label>
+                        <input type="text" name="student_name" id="student_name" placeholder="Enter Full Student Name" required>
+                    </div>
+                </div>
+
+                <div class="input-block">
+                    <div class="input-content">
+                        <label class="field-label">School Name <span class="req">*</span></label>
+                        <select name="school_name" id="school_name" required>
+                            <option value="" disabled selected>Select School</option>
+                            <option value="D.A.V. PUBLIC SCHOOL">D.A.V. PUBLIC SCHOOL</option>
+                            <option value="NEW HORIZON PUBLIC SCHOOL">NEW HORIZON PUBLIC SCHOOL</option>
+                            <option value="DATTA MEGHE WORLD ACADEMY">DATTA MEGHE WORLD ACADEMY</option>
+                            <option value="NEW HORIZON SCHOLARS SCHOOL">NEW HORIZON SCHOLARS SCHOOL</option>
+                            <option value="ZENITH INTERNATIONAL & PETITE KIDS SCHOOL">ZENITH INTERNATIONAL & PETITE KIDS SCHOOL</option>
+                            <option value="PHOENIX INTERNATIONAL SCHOOL">PHOENIX INTERNATIONAL SCHOOL</option>
+                            <option value="VIBGYOR HIGH SCHOOL">VIBGYOR HIGH SCHOOL</option>
+                            <option value="RELIANCE FOUNDATION SCHOOLS">RELIANCE FOUNDATION SCHOOLS</option>
+                            <option value="NEW BOMBAY CITY SCHOOL">NEW BOMBAY CITY SCHOOL</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: SCORECARD GRID -->
+            <section class="dynamic-section scorecard-box">
+                <div class="section-title" style="border-left-color: #F8981D;">Step 2: Marks Scored in Boards (Theory & Practical)</div>
+                
+                <div class="score-grid-container">
+                    <div class="score-header">
+                        <span>Subject</span>
+                        <span>Theory (80)</span>
+                        <span>Practical (20)</span>
+                        <span>Total (100)</span>
+                    </div>
+
+                    <!-- SUBJECT: ENGLISH -->
+                    <div class="score-row" data-subject="English">
+                        <div class="subject-name">English</div>
+                        <div class="mark-input-cell"><input type="number" step="1" min="0" max="80" class="theory-input" required placeholder="0-80"></div>
+                        <div class="mark-input-cell"><input type="number" step="1" min="0" max="20" class="practical-input" required placeholder="0-20"></div>
+                        <div class="total-display">0</div>
+                    </div>
+
+                    <!-- SUBJECT: MATHS -->
+                    <div class="score-row" data-subject="Maths">
+                        <div class="subject-name">Maths</div>
+                        <div class="mark-input-cell"><input type="number" step="1" min="0" max="80" class="theory-input" required placeholder="0-80"></div>
+                        <div class="mark-input-cell"><input type="number" step="1" min="0" max="20" class="practical-input" required placeholder="0-20"></div>
+                        <div class="total-display">0</div>
+                    </div>
+
+                    <!-- SUBJECT: SCIENCE -->
+                    <div class="score-row" data-subject="Science">
+                        <div class="subject-name">Science</div>
+                        <div class="mark-input-cell"><input type="number" step="1" min="0" max="80" class="theory-input" required placeholder="0-80"></div>
+                        <div class="mark-input-cell"><input type="number" step="1" min="0" max="20" class="practical-input" required placeholder="0-20"></div>
+                        <div class="total-display">0</div>
+                    </div>
+
+                    <!-- SUBJECT: SOCIAL SCIENCE -->
+                    <div class="score-row" data-subject="Social Science">
+                        <div class="subject-name">Social Science</div>
+                        <div class="mark-input-cell"><input type="number" step="1" min="0" max="80" class="theory-input" required placeholder="0-80"></div>
+                        <div class="mark-input-cell"><input type="number" step="1" min="0" max="20" class="practical-input" required placeholder="0-20"></div>
+                        <div class="total-display">0</div>
+                    </div>
+
+                    <!-- SUBJECT: SECONDARY LANGUAGE -->
+                    <div class="score-row" data-subject="Secondary Language">
+                        <div class="subject-name">Secondary Language</div>
+                        <div class="mark-input-cell"><input type="number" step="1" min="0" max="80" class="theory-input" required placeholder="0-80"></div>
+                        <div class="mark-input-cell"><input type="number" step="1" min="0" max="20" class="practical-input" required placeholder="0-20"></div>
+                        <div class="total-display">0</div>
+                    </div>
+                </div>
+
+                <!-- LIVE PERCENTAGE PREVIEW -->
+                <div class="percentage-summary">
+                    <div class="summary-card">
+                        <label>Boards Percentage (Theory Avg)</label>
+                        <div id="boardPercentDisplay">0.00%</div>
+                    </div>
+                    <div class="summary-card school">
+                        <label>School Overall Percentage (Total Avg)</label>
+                        <div id="schoolPercentDisplay">0.00%</div>
+                    </div>
+                </div>
+
+                <div class="input-block" style="margin-top: 25px;">
+                    <div class="input-content">
+                        <label class="field-label">Upload Scorecard (IMG/PDF) <span class="req">*</span></label>
+                        <div class="file-upload-wrapper">
+                            <input type="file" id="scorecardFile" accept=".jpg,.jpeg,.png,.pdf" required>
+                            <p class="file-hint">Max size: 5MB (JPG, PNG, PDF)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-block" style="margin-top: 20px;">
+                    <div class="input-content">
+                        <label class="field-label">Remarks</label>
+                        <textarea name="remarks" id="remarks" rows="2" placeholder="Remarks"></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <button type="submit" id="submitBtn">Submit Result</button>
+        </form>
+    </div>
+
+    <!-- SUCCESS OVERLAY -->
+    <div id="successOverlay" class="success-overlay">
+        <div class="success-content">
+            <div class="success-icon">🎯</div>
+            <h2>Result Captured!</h2>
+            <p>Board scores summarized and logged.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
