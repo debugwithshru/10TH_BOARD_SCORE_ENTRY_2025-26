@@ -64,19 +64,17 @@ document.addEventListener('DOMContentLoaded', () => {
         formDataPayload.append('school_overall_percentage', schoolPercentDisplay.textContent);
         formDataPayload.append('remarks', document.getElementById('remarks').value || '');
 
-        // Capture Subject Grid
-        const subjectsData = [];
+        // Capture Subject Grid & Flatten for n8n mapping
         document.querySelectorAll('.score-row').forEach(row => {
-            subjectsData.push({
-                subject: row.getAttribute('data-subject'),
-                theory: parseFloat(row.querySelector('.theory-input').value) || 0,
-                practical: parseFloat(row.querySelector('.practical-input').value) || 0,
-                total: parseFloat(row.querySelector('.total-display').textContent) || 0
-            });
+            const subjectKey = row.getAttribute('data-subject').toUpperCase().replace(/\s+/g, '_');
+            const theory = parseFloat(row.querySelector('.theory-input').value) || 0;
+            const practical = parseFloat(row.querySelector('.practical-input').value) || 0;
+            const total = parseFloat(row.querySelector('.total-display').textContent) || 0;
+
+            formDataPayload.append(`${subjectKey}_TH`, theory);
+            formDataPayload.append(`${subjectKey}_PR`, practical);
+            formDataPayload.append(`${subjectKey}_TOTAL`, total);
         });
-        
-        // Send subjects as a stringified JSON field
-        formDataPayload.append('subjects', JSON.stringify(subjectsData));
 
         // THE ACTUAL BINARY FILE
         if (file) {
