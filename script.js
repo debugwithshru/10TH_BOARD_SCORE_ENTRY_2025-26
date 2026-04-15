@@ -48,35 +48,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const btn = document.getElementById('submitBtn');
         btn.disabled = true;
-        btn.textContent = 'Processing File...';
+        btn.textContent = 'Preparing Data...';
 
         const fileInput = document.getElementById('scorecardFile');
-        let fileBase64 = null;
-        let fileName = null;
+        const file = fileInput.files[0];
 
-        if (fileInput.files.length > 0) {
-            const file = fileInput.files[0];
-            fileName = file.name;
-            try {
-                fileBase64 = await new Promise((resolve, reject) => {
-                    const reader = new FileReader();
-                    reader.onload = () => resolve(reader.result.split(',')[1]);
-                    reader.onerror = (e) => reject(e);
-                    reader.readAsDataURL(file);
-                });
-            } catch (err) {
-                console.error('File reading failed', err);
-                alert('Could not read the scorecard file.');
-                btn.disabled = false;
-                btn.textContent = 'Submit Result';
-                return;
-            }
-        }
-
-        btn.textContent = 'Submitting Results...';
-        const formData = new FormData(form);
-        const subjectsData = [];
+        // We use FormData for true binary transmission (n8n "Binary Data" compatibility)
+        const formDataPayload = new FormData();
         
+        formDataPayload.append('form_origin', '10TH_BOARD_SCORE_ENTRY');
+        formDataPayload.append('student_name', document.getElementById('student_name').value);
+        formDataPayload.append('school_name', document.getElementById('school_name').value);
+        formDataPayload.append('academic_year', '2025-26');
+        formDataPayload.append('board_percentage', boardPercentDisplay.textContent);
+        formDataPayload.append('school_overall_percentage', schoolPercentDisplay.textContent);
+        formDataPayload.append('remarks', document.getElementById('remarks').value || '');
+
+        // Capture Subject Grid
+        const subjectsData = [];
         document.querySelectorAll('.score-row').forEach(row => {
             subjectsData.push({
                 subject: row.getAttribute('data-subject'),
@@ -85,30 +74,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 total: parseFloat(row.querySelector('.total-display').textContent) || 0
             });
         });
+        
+        // Send subjects as a stringified JSON field
+        formDataPayload.append('subjects', JSON.stringify(subjectsData));
 
-        const payload = {
-            form_origin: "10TH_BOARD_SCORE_ENTRY",
-            student_name: formData.get('student_name'),
-            school_name: formData.get('school_name'),
-            academic_year: "2025-26",
-            subjects: subjectsData,
-            board_percentage: boardPercentDisplay.textContent,
-            school_overall_percentage: schoolPercentDisplay.textContent,
-            scorecard_filename: fileName,
-            scorecard_base64: fileBase64,
-            remarks: formData.get('remarks') || ''
-        };
+        // THE ACTUAL BINARY FILE
+        if (file) {
+            formDataPayload.append('scorecard', file);
+        }
 
-        console.log('Sending Board Score Payload with File:', payload.student_name);
+        btn.textContent = 'Uploading Binary Data...';
 
         try {
+            // PRODUCTION WEBHOOK URL
             const WEBHOOK_URL = 'https://n8n.srv1498466.hstgr.cloud/webhook/af03ba5f-1fa0-4c11-9642-5f5a610f064a';
             
-            await fetch(WEBHOOK_URL, {
+            // Note: We DO NOT set 'Content-Type' header. 
+            // The browser will automatically set it to multipart/form-data with the correct boundary.
+            const response = await fetch(WEBHOOK_URL, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
+                body: formDataPayload
             });
+
+            if (!response.ok) throw new Error('Submission failed with status ' + response.status);
 
             document.getElementById('successOverlay').classList.add('active');
             
@@ -126,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Submit Failed', err);
             btn.disabled = false;
             btn.textContent = 'Submit Result';
-            alert('Submission failed. Check network log.');
+            alert('Upload failed. Please check your internet or webhook status.');
         }
     });
 });
