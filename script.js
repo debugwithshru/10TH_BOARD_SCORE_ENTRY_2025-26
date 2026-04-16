@@ -118,6 +118,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
+
+        // --- STRICT VALIDATION ---
+        const fileInput = document.getElementById('scorecardFile');
+        const file = fileInput.files[0];
+
+        if (!file) {
+            alert('❌ ERROR: Please upload the scorecard image or PDF first!');
+            return;
+        }
+
+        const maxSizeBytes = 5 * 1024 * 1024; // 5MB
+        if (file.size > maxSizeBytes) {
+            alert('❌ ERROR: File too large! Please upload a file smaller than 5MB.');
+            return;
+        }
+
         showReview();
     });
 
