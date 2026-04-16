@@ -155,11 +155,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.querySelectorAll('.score-row').forEach(row => {
             let label = row.getAttribute('data-subject');
-            if (label === 'Optional Subject') label = optionalSubjectValue;
-            const subjectKey = label.toUpperCase().replace(/\s+/g, '_');
+            let subjectKey;
+
+            if (label === 'Optional Subject') {
+                subjectKey = 'OPTIONAL_SUBJECT';
+            } else {
+                subjectKey = label.toUpperCase().replace(/\s+/g, '_');
+            }
+
             const theory = parseFloat(row.querySelector('.theory-input').value) || 0;
             const practical = parseFloat(row.querySelector('.practical-input').value) || 0;
             const total = parseFloat(row.querySelector('.total-display').textContent) || 0;
+
             formDataPayload.append(`${subjectKey}_TH`, theory);
             formDataPayload.append(`${subjectKey}_PR`, practical);
             formDataPayload.append(`${subjectKey}_TOTAL`, total);
