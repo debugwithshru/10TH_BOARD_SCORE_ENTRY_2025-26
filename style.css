@@ -406,27 +406,29 @@ button[type="submit"]:hover { transform: translateY(-2px); box-shadow: 0 15px 30
         padding: 15px;
     }
 
+    /* REVERT MARKS STACKING - Keep horizontal layout */
     .score-row {
-        grid-template-columns: 1fr; /* Stack subject labels above inputs */
-        gap: 10px;
-        padding-bottom: 15px;
-        border-bottom: 1px dashed #eee;
+        padding: 10px 5px;
+        grid-template-columns: 2.2fr 1fr 1fr 0.8fr; /* Adjust for tight mobile widths */
+    }
+    
+    .score-header {
+        padding: 10px 5px;
+        grid-template-columns: 2.2fr 1fr 1fr 0.8fr;
     }
 
-    .score-row:last-child {
-        border-bottom: none;
+    .mark-input-cell input {
+        font-size: 0.95rem;
+        width: 100%;
     }
 
     .subject-name {
-        font-weight: 700;
-        margin-bottom: 5px;
+        font-size: 0.85rem;
+        margin-bottom: 0;
     }
 
-    .marks-inputs {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 10px;
-        align-items: end;
+    .total-display {
+        font-size: 1rem;
     }
 
     .review-card {
