@@ -109,8 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
         html += `
             <div style="margin: 10px 0; border-top: 1px dashed #ccc;"></div>
             <div class="review-item total"><span>Boards % (Theory):</span> <span>${boardPercentDisplay.textContent}</span></div>
-            <div class="review-item total"><span>Best of 5 %:</span> <span>${bestOf5PercentDisplay.textContent}</span></div>
             <div class="review-item total"><span>School Overall %:</span> <span>${schoolPercentDisplay.textContent}</span></div>
+            <div class="review-item total"><span>Best of 5 %:</span> <span>${bestOf5PercentDisplay.textContent}</span></div>
         `;
 
         reviewContent.innerHTML = html;
