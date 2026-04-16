@@ -20,10 +20,29 @@
             <section class="dynamic-section">
                 <div class="section-title">Step 1: Student & School Context</div>
                 
-                <div class="input-block">
-                    <div class="input-content">
-                        <label class="field-label">Student Name <span class="req">*</span></label>
-                        <input type="text" name="student_name" id="student_name" placeholder="Enter Full Student Name" required>
+                <div class="grid-row">
+                    <div class="input-block">
+                        <div class="input-content">
+                            <label class="field-label">Student Name <span class="req">*</span></label>
+                            <input type="text" name="student_name" id="student_name" placeholder="Enter Full Student Name" required>
+                        </div>
+                    </div>
+                    <div class="input-block">
+                        <div class="input-content">
+                            <label class="field-label">School Name <span class="req">*</span></label>
+                            <select name="school_name" id="school_name" required>
+                                <option value="" disabled selected>Select School</option>
+                                <option value="D.A.V. PUBLIC SCHOOL">D.A.V. PUBLIC SCHOOL</option>
+                                <option value="NEW HORIZON PUBLIC SCHOOL">NEW HORIZON PUBLIC SCHOOL</option>
+                                <option value="DATTA MEGHE WORLD ACADEMY">DATTA MEGHE WORLD ACADEMY</option>
+                                <option value="NEW HORIZON SCHOLARS SCHOOL">NEW HORIZON SCHOLARS SCHOOL</option>
+                                <option value="ZENITH INTERNATIONAL & PETITE KIDS SCHOOL">ZENITH INTERNATIONAL & PETITE KIDS SCHOOL</option>
+                                <option value="PHOENIX INTERNATIONAL SCHOOL">PHOENIX INTERNATIONAL SCHOOL</option>
+                                <option value="VIBGYOR HIGH SCHOOL">VIBGYOR HIGH SCHOOL</option>
+                                <option value="RELIANCE FOUNDATION SCHOOLS">RELIANCE FOUNDATION SCHOOLS</option>
+                                <option value="NEW BOMBAY CITY SCHOOL">NEW BOMBAY CITY SCHOOL</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
@@ -34,22 +53,6 @@
                     </div>
                 </div>
 
-                <div class="input-block">
-                    <div class="input-content">
-                        <label class="field-label">School Name <span class="req">*</span></label>
-                        <select name="school_name" id="school_name" required>
-                            <option value="" disabled selected>Select School</option>
-                            <option value="D.A.V. PUBLIC SCHOOL">D.A.V. PUBLIC SCHOOL</option>
-                            <option value="NEW HORIZON PUBLIC SCHOOL">NEW HORIZON PUBLIC SCHOOL</option>
-                            <option value="DATTA MEGHE WORLD ACADEMY">DATTA MEGHE WORLD ACADEMY</option>
-                            <option value="NEW HORIZON SCHOLARS SCHOOL">NEW HORIZON SCHOLARS SCHOOL</option>
-                            <option value="ZENITH INTERNATIONAL & PETITE KIDS SCHOOL">ZENITH INTERNATIONAL & PETITE KIDS SCHOOL</option>
-                            <option value="PHOENIX INTERNATIONAL SCHOOL">PHOENIX INTERNATIONAL SCHOOL</option>
-                            <option value="VIBGYOR HIGH SCHOOL">VIBGYOR HIGH SCHOOL</option>
-                            <option value="RELIANCE FOUNDATION SCHOOLS">RELIANCE FOUNDATION SCHOOLS</option>
-                            <option value="NEW BOMBAY CITY SCHOOL">NEW BOMBAY CITY SCHOOL</option>
-                        </select>
-                    </div>
                 <div class="grid-row" style="margin-top: 20px;">
                     <div class="input-block">
                         <div class="input-content">
@@ -64,6 +67,7 @@
                     </div>
                     <div class="input-block">
                         <div class="input-content">
+                            <label class="field-label">Choose Optional Subject <span class="req">*</span></label>
                             <select name="chosen_optional_subject" id="chosen_optional_subject" required>
                                 <option value="" disabled selected>Select Optional</option>
                                 <option value="FMM">FMM</option>
