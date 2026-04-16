@@ -84,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function showReview() {
         const student = document.getElementById('student_name').value;
         const school = document.getElementById('school_name').value;
+        const grade9Pct = document.getElementById('grade_9_percentage').value;
         const lang2nd = document.getElementById('chosen_2nd_language').value;
         let optSub = optionalSubjectSelect.value;
         if (optSub === 'OTHER') optSub = otherOptionalInput.value || 'Other';
@@ -91,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let html = `
             <div class="review-item highlight"><span>Student:</span> <span>${student}</span></div>
             <div class="review-item"><span>School:</span> <span>${school}</span></div>
+            <div class="review-item"><span>Grade 9th Pct:</span> <span>${grade9Pct}%</span></div>
             <div class="review-item"><span>2nd Language:</span> <span>${lang2nd}</span></div>
             <div class="review-item"><span>Optional:</span> <span>${optSub}</span></div>
             <div style="margin: 10px 0; border-top: 1px dashed #ccc;"></div>
@@ -137,6 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formDataPayload.append('form_origin', '10TH_BOARD_SCORE_ENTRY');
         formDataPayload.append('student_name', document.getElementById('student_name').value);
         formDataPayload.append('school_name', document.getElementById('school_name').value);
+        formDataPayload.append('grade_9_percentage', document.getElementById('grade_9_percentage').value);
         formDataPayload.append('academic_year', '2025-26');
         formDataPayload.append('chosen_2nd_language', document.getElementById('chosen_2nd_language').value);
         
