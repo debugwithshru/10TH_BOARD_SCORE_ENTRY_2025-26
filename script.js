@@ -16,10 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- LOGIC: REAL-TIME MATH ---
     function updateCalculations() {
-        let totalTheoryMain = 0; // English + Math + Sci + SS + 2nd Lang
-        let totalAllSubjects = 0; // Sum of all 6
-        const mainSubjectCount = 5;
-        const allTotals = [];
+        let totalTheoryMain = 0; // English + Math + Sci + SS + 2nd Lang (Max 400)
+        let totalMainOverall = 0; // English + Math + Sci + SS + 2nd Lang (Max 500)
+        const allTotals6 = []; // All 6 totals for Best of 5 logic
 
         document.querySelectorAll('.score-row').forEach(row => {
             const subjectLabel = row.getAttribute('data-subject');
@@ -29,25 +28,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
             row.querySelector('.total-display').textContent = total;
             
-            // Collect all totals for Best of 5
-            allTotals.push(total);
-            totalAllSubjects += total;
+            // For Best of 5 calculation
+            allTotals6.push(total);
 
-            // Main Theory: Everything except Optional Subject
+            // Compulsory 5 Logic (Excluding Optional Subject)
             if (subjectLabel !== 'Optional Subject') {
                 totalTheoryMain += theory;
+                totalMainOverall += total;
             }
         });
 
-        // 1. Boards % = Theory only (Avg based on first 5 subjects max 80)
-        const boardP = (totalTheoryMain / (80 * mainSubjectCount)) * 100;
+        // 1. Boards % = Theory of 5 Main Subjects / 400
+        const boardP = (totalTheoryMain / 400) * 100;
         
-        // 2. Best of 5 % = Top 5 totals / 500
-        const top5Sum = [...allTotals].sort((a,b) => b-a).slice(0, 5).reduce((a,b) => a+b, 0);
-        const best5P = (top5Sum / 500) * 100;
+        // 2. School Overall % = Total Marks of 5 Main Subjects / 500
+        const schoolP = (totalMainOverall / 500) * 100;
 
-        // 3. School Overall % = Total of all 6 / 600
-        const schoolP = (totalAllSubjects / 600) * 100;
+        // 3. Best of 5 % = Top 5 total marks out of all 6 subjects / 500
+        const top5Sum = [...allTotals6].sort((a,b) => b-a).slice(0, 5).reduce((a,b) => a+b, 0);
+        const best5P = (top5Sum / 500) * 100;
 
         boardPercentDisplay.textContent = boardP.toFixed(2) + '%';
         bestOf5PercentDisplay.textContent = best5P.toFixed(2) + '%';
