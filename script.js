@@ -14,6 +14,46 @@ document.addEventListener('DOMContentLoaded', () => {
     const confirmBtn = document.getElementById('confirmBtn');
     const editBtn = document.getElementById('editBtn');
 
+    // --- INFO POPUP LOGIC ---
+    const infoPopup = document.getElementById('infoPopup');
+    const infoClose = document.getElementById('infoPopupClose');
+    const infoTitle = document.getElementById('infoPopupTitle');
+    const infoText = document.getElementById('infoPopupText');
+    const infoIcons = document.querySelectorAll('.info-icon');
+
+    const infoContent = {
+        'boards_theory': {
+            title: 'Boards % (Theory)',
+            text: 'This counts ONLY your Theory marks for the 5 main subjects (English, Maths, Science, Social Science, and 2nd Language). It ignores your Optional subject and all Practical marks. The total is calculated out of 400.'
+        },
+        'boards_overall': {
+            title: 'BOARDS OVERALL',
+            text: 'This is your total percentage based on the 5 main subjects (Theory + Practical marks). The Optional subject is not included in this. The total is calculated out of 500.'
+        },
+        'best_of_5': {
+            title: 'Best of 5 Percentage',
+            text: 'This picks your 5 highest-scoring subjects out of all 6 subjects (including your Optional subject). Your lowest-scoring subject is ignored. The total is calculated out of 500.'
+        }
+    };
+
+    infoIcons.forEach(icon => {
+        icon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const key = icon.getAttribute('data-info');
+            const data = infoContent[key];
+            if (data) {
+                infoTitle.textContent = data.title;
+                infoText.textContent = data.text;
+                infoPopup.classList.add('active');
+            }
+        });
+    });
+
+    infoClose.addEventListener('click', () => infoPopup.classList.remove('active'));
+    infoPopup.addEventListener('click', (e) => {
+        if (e.target === infoPopup) infoPopup.classList.remove('active');
+    });
+
     // --- LOGIC: REAL-TIME MATH ---
     function updateCalculations() {
         let totalTheoryMain = 0; // English + Math + Sci + SS + 2nd Lang (Max 400)
@@ -108,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
         html += `
             <div style="margin: 10px 0; border-top: 1px dashed #ccc;"></div>
             <div class="review-item total"><span>Boards % (Theory):</span> <span>${boardPercentDisplay.textContent}</span></div>
-            <div class="review-item total"><span>School Overall %:</span> <span>${schoolPercentDisplay.textContent}</span></div>
+            <div class="review-item total"><span>BOARDS OVERALL:</span> <span>${schoolPercentDisplay.textContent}</span></div>
             <div class="review-item total"><span>Best of 5 %:</span> <span>${bestOf5PercentDisplay.textContent}</span></div>
         `;
 

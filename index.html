@@ -72,6 +72,7 @@
                                 <option value="" disabled selected>Select Optional</option>
                                 <option value="FMM">FMM</option>
                                 <option value="IT">IT</option>
+                                <option value="PAT">PAT</option>
                                 <option value="OTHER">OTHER</option>
                             </select>
                         </div>
@@ -140,7 +141,7 @@
 
                     <!-- SUBJECT: OPTIONAL SUBJECT -->
                     <div class="score-row" data-subject="Optional Subject">
-                        <div class="subject-name">Optional (FMM/IT)</div>
+                        <div class="subject-name">Optional (FMM/IT/PAT)</div>
                         <div class="mark-input-cell"><input type="number" step="1" min="0" max="50" class="theory-input" required placeholder="0-50"></div>
                         <div class="mark-input-cell"><input type="number" step="1" min="0" max="50" class="practical-input" required placeholder="0-50"></div>
                         <div class="total-display">0</div>
@@ -150,16 +151,40 @@
                 <!-- LIVE PERCENTAGE PREVIEW -->
                 <div class="percentage-summary">
                     <div class="summary-card">
-                        <label>Boards % (Theory)</label>
+                        <label>
+                            Boards % (Theory)
+                            <svg class="info-icon" data-info="boards_theory" viewBox="0 0 24 24" width="14" height="14">
+                                <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                            </svg>
+                        </label>
                         <div id="boardPercentDisplay">0.00%</div>
                     </div>
                     <div class="summary-card school">
-                        <label>School Overall %</label>
+                        <label>
+                            BOARDS OVERALL
+                            <svg class="info-icon" data-info="boards_overall" viewBox="0 0 24 24" width="14" height="14">
+                                <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                            </svg>
+                        </label>
                         <div id="schoolPercentDisplay">0.00%</div>
                     </div>
                     <div class="summary-card best-of-five">
-                        <label>Best of 5 Percentage</label>
+                        <label>
+                            Best of 5 Percentage
+                            <svg class="info-icon" data-info="best_of_5" viewBox="0 0 24 24" width="14" height="14">
+                                <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                            </svg>
+                        </label>
                         <div id="bestOf5PercentDisplay">0.00%</div>
+                    </div>
+                </div>
+
+                <!-- INFO POPUP -->
+                <div id="infoPopup" class="info-popup">
+                    <div class="info-popup-content">
+                        <span id="infoPopupClose" class="info-close">&times;</span>
+                        <div id="infoPopupTitle" class="info-title">Calculation Details</div>
+                        <div id="infoPopupText" class="info-text">Explanation goes here.</div>
                     </div>
                 </div>
 
