@@ -11,7 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const reviewOverlay = document.getElementById('reviewOverlay');
     const successOverlay = document.getElementById('successOverlay');
     const reviewContent = document.getElementById('reviewContent');
-    const confirmBtn = document.getElementById('confirmBtn');
+    const confirmBtnTop = document.getElementById('confirmBtn');
+    const confirmBtnBottom = document.getElementById('confirmBtnBottom');
+    const confirmBtns = [confirmBtnTop, confirmBtnBottom];
     const editBtn = document.getElementById('editBtn');
 
     // --- INFO POPUP LOGIC ---
@@ -182,79 +184,87 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- ACTUAL FINAL SUBMISSION ---
-    confirmBtn.addEventListener('click', async () => {
-        confirmBtn.disabled = true;
-        confirmBtn.textContent = 'Submitting...';
+    confirmBtns.forEach(btn => {
+        btn.addEventListener('click', async () => {
+            confirmBtns.forEach(b => {
+                b.disabled = true;
+                b.textContent = 'Submitting...';
+            });
 
-        const fileInput = document.getElementById('scorecardFile');
-        const file = fileInput.files[0];
+            const fileInput = document.getElementById('scorecardFile');
+            const file = fileInput.files[0];
 
-        const formDataPayload = new FormData();
-        
-        formDataPayload.append('form_origin', '10TH_BOARD_SCORE_ENTRY');
-        formDataPayload.append('student_name', document.getElementById('student_name').value);
-        formDataPayload.append('school_name', document.getElementById('school_name').value);
-        formDataPayload.append('grade_9_percentage', document.getElementById('grade_9_percentage').value);
-        formDataPayload.append('academic_year', '2025-26');
-        formDataPayload.append('chosen_2nd_language', document.getElementById('chosen_2nd_language').value);
-        
-        let optionalSubjectValue = optionalSubjectSelect.value;
-        if (optionalSubjectValue === 'OTHER') {
-            optionalSubjectValue = otherOptionalInput.value.toUpperCase();
-        }
-        formDataPayload.append('chosen_optional_subject', optionalSubjectValue);
-
-        formDataPayload.append('board_percentage', boardPercentDisplay.textContent);
-        formDataPayload.append('best_of_5_percentage', bestOf5PercentDisplay.textContent);
-        formDataPayload.append('school_overall_percentage', schoolPercentDisplay.textContent);
-        formDataPayload.append('remarks', document.getElementById('remarks').value || '');
-
-        document.querySelectorAll('.score-row').forEach(row => {
-            let label = row.getAttribute('data-subject');
-            let subjectKey;
-
-            if (label === 'Optional Subject') {
-                subjectKey = 'OPTIONAL_SUBJECT';
-            } else {
-                subjectKey = label.toUpperCase().replace(/\s+/g, '_');
-            }
-
-            const theory = parseFloat(row.querySelector('.theory-input').value) || 0;
-            const practical = parseFloat(row.querySelector('.practical-input').value) || 0;
-            const total = parseFloat(row.querySelector('.total-display').textContent) || 0;
-
-            formDataPayload.append(`${subjectKey}_TH`, theory);
-            formDataPayload.append(`${subjectKey}_PR`, practical);
-            formDataPayload.append(`${subjectKey}_TOTAL`, total);
-        });
-
-        if (file) formDataPayload.append('scorecard', file);
-
-        try {
-            const WEBHOOK_URL = 'https://n8n.srv1498466.hstgr.cloud/webhook/af03ba5f-1fa0-4c11-9642-5f5a610f064a';
-            const response = await fetch(WEBHOOK_URL, { method: 'POST', body: formDataPayload });
-            if (!response.ok) throw new Error('Submission failed');
-
-            reviewOverlay.classList.remove('active');
-            successOverlay.classList.add('active');
+            const formDataPayload = new FormData();
             
-            setTimeout(() => {
-                successOverlay.classList.remove('active');
-                confirmBtn.disabled = false;
-                confirmBtn.textContent = 'Confirm & Finalize';
-                form.reset();
-                document.querySelectorAll('.total-display').forEach(td => td.textContent = '0');
-                boardPercentDisplay.textContent = '0.00%';
-                bestOf5PercentDisplay.textContent = '0.00%';
-                schoolPercentDisplay.textContent = '0.00%';
-                otherOptionalWrapper.classList.add('hidden-field');
-            }, 3000);
+            formDataPayload.append('form_origin', '10TH_BOARD_SCORE_ENTRY');
+            formDataPayload.append('student_name', document.getElementById('student_name').value);
+            formDataPayload.append('school_name', document.getElementById('school_name').value);
+            formDataPayload.append('grade_9_percentage', document.getElementById('grade_9_percentage').value);
+            formDataPayload.append('academic_year', '2025-26');
+            formDataPayload.append('chosen_2nd_language', document.getElementById('chosen_2nd_language').value);
+            
+            let optionalSubjectValue = optionalSubjectSelect.value;
+            if (optionalSubjectValue === 'OTHER') {
+                optionalSubjectValue = otherOptionalInput.value.toUpperCase();
+            }
+            formDataPayload.append('chosen_optional_subject', optionalSubjectValue);
 
-        } catch (err) {
-            console.error('Submit Failed', err);
-            confirmBtn.disabled = false;
-            confirmBtn.textContent = 'Confirm & Finalize';
-            alert('Upload failed. Please check connection.');
-        }
+            formDataPayload.append('board_percentage', boardPercentDisplay.textContent);
+            formDataPayload.append('best_of_5_percentage', bestOf5PercentDisplay.textContent);
+            formDataPayload.append('school_overall_percentage', schoolPercentDisplay.textContent);
+            formDataPayload.append('remarks', document.getElementById('remarks').value || '');
+
+            document.querySelectorAll('.score-row').forEach(row => {
+                let label = row.getAttribute('data-subject');
+                let subjectKey;
+
+                if (label === 'Optional Subject') {
+                    subjectKey = 'OPTIONAL_SUBJECT';
+                } else {
+                    subjectKey = label.toUpperCase().replace(/\s+/g, '_');
+                }
+
+                const theory = parseFloat(row.querySelector('.theory-input').value) || 0;
+                const practical = parseFloat(row.querySelector('.practical-input').value) || 0;
+                const total = parseFloat(row.querySelector('.total-display').textContent) || 0;
+
+                formDataPayload.append(`${subjectKey}_TH`, theory);
+                formDataPayload.append(`${subjectKey}_PR`, practical);
+                formDataPayload.append(`${subjectKey}_TOTAL`, total);
+            });
+
+            if (file) formDataPayload.append('scorecard', file);
+
+            try {
+                const WEBHOOK_URL = 'https://n8n.srv1498466.hstgr.cloud/webhook/af03ba5f-1fa0-4c11-9642-5f5a610f064a';
+                const response = await fetch(WEBHOOK_URL, { method: 'POST', body: formDataPayload });
+                if (!response.ok) throw new Error('Submission failed');
+
+                reviewOverlay.classList.remove('active');
+                successOverlay.classList.add('active');
+                
+                setTimeout(() => {
+                    successOverlay.classList.remove('active');
+                    confirmBtns.forEach(b => {
+                        b.disabled = false;
+                        b.innerHTML = 'Confirm & Finalize <span class="btn-subtext">(Tap To Submit)</span>';
+                    });
+                    form.reset();
+                    document.querySelectorAll('.total-display').forEach(td => td.textContent = '0');
+                    boardPercentDisplay.textContent = '0.00%';
+                    bestOf5PercentDisplay.textContent = '0.00%';
+                    schoolPercentDisplay.textContent = '0.00%';
+                    otherOptionalWrapper.classList.add('hidden-field');
+                }, 3000);
+
+            } catch (err) {
+                console.error('Submit Failed', err);
+                confirmBtns.forEach(b => {
+                    b.disabled = false;
+                    b.innerHTML = 'Confirm & Finalize <span class="btn-subtext">(Tap To Submit)</span>';
+                });
+                alert('Upload failed. Please check connection.');
+            }
+        });
     });
 });

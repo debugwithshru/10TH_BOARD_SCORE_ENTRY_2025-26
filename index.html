@@ -213,8 +213,16 @@
     <!-- DATA REVIEW OVERLAY -->
     <div id="reviewOverlay" class="review-overlay">
         <div class="review-card">
-            <h3>Review Entry Data</h3>
-            <p class="review-hint">Please verify all scores before final submission.</p>
+            <div class="review-header">
+                <div class="header-text">
+                    <h3>Review Entry Data</h3>
+                    <p class="review-hint">Please verify all scores before final submission.</p>
+                </div>
+                <button type="button" id="confirmBtn" class="btn-primary">
+                    Confirm & Finalize 
+                    <span class="btn-subtext">(Tap To Submit)</span>
+                </button>
+            </div>
             
             <div id="reviewContent" class="review-data-grid">
                 <!-- Javascript will populate this -->
@@ -222,7 +230,10 @@
 
             <div class="review-actions">
                 <button type="button" id="editBtn" class="btn-secondary">Back to Edit</button>
-                <button type="button" id="confirmBtn" class="btn-primary">Confirm & Finalize</button>
+                <button type="button" id="confirmBtnBottom" class="btn-primary">
+                    Confirm & Finalize 
+                    <span class="btn-subtext">(Tap To Submit)</span>
+                </button>
             </div>
         </div>
     </div>
