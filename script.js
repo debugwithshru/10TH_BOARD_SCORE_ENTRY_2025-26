@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+﻿document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('boardScoreForm');
     const theoryInputs = document.querySelectorAll('.theory-input');
     const practicalInputs = document.querySelectorAll('.practical-input');
@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (file) formDataPayload.append('scorecard', file);
 
             try {
-                const WEBHOOK_URL = 'https://n8n.srv1498466.hstgr.cloud/webhook/af03ba5f-1fa0-4c11-9642-5f5a610f064a';
+                const WEBHOOK_URL = 'https://n8n.srv1761768.hstgr.cloud/webhook/af03ba5f-1fa0-4c11-9642-5f5a610f064a';
                 const response = await fetch(WEBHOOK_URL, { method: 'POST', body: formDataPayload });
                 if (!response.ok) throw new Error('Submission failed');
 
